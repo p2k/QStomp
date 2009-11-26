@@ -13,8 +13,8 @@ HEADERS += src/qstomp.h \
     src/qstomp_global.h \
     src/qstomp_p.h
 
-target.path = $$DESTDIR/usr/lib
-dist_headers.path = $$DESTDIR/usr/include/qstomp
+target.path = $$DESTDIR/lib
+dist_headers.path = $$DESTDIR/include/qstomp
 dist_headers.files = src/qstomp.h src/qstomp_global.h
 
 VERSION = 0.2.0
