@@ -1,0 +1,7 @@
+*.o
+*.so*
+*.dylib
+*.dll
+Makefile
+moc_*.cpp
+*.pro.user
