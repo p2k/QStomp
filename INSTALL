@@ -3,10 +3,13 @@ Installing QStomp
 
 QStomp requires Qt 4.0 or greater.
 
-For Unix/Linux/Mac:
+Run the following commands in a shell:
 
-  qmake -config release DESTDIR=/usr/local
+  qmake -config release
   make install
+
+The last command may need root privileges on
+POSIX operating systems.
 
 Please report problems to:
   http://github.com/p2k/QStomp/issues
