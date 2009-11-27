@@ -30,8 +30,8 @@ HEADERS += src/qstomp.h \
     src/qstomp_global.h \
 	src/qstomp_p.h
 
-target.path = $$QT_INSTALL_LIBS
-dist_headers.path = $$QT_INSTALL_HEADERS/qstomp
+target.path = $(QT_INSTALL_LIBS)
+dist_headers.path = $(QT_INSTALL_HEADERS)/qstomp
 dist_headers.files = src/qstomp.h src/qstomp_global.h
 
 VERSION = 0.3.0
