@@ -716,7 +716,7 @@ void QStompClient::connectToHost(const QString &hostname, quint16 port)
 	connect(d->m_socket, SIGNAL(disconnected()), this, SIGNAL(socketDisconnected()));
 	connect(d->m_socket, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SIGNAL(socketStateChanged(QAbstractSocket::SocketState)));
 	connect(d->m_socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SIGNAL(socketError(QAbstractSocket::SocketError)));
-	connect(d->m_socket, SIGNAL(readyRead()), this, SLOT(socketReadyRead()));
+	connect(d->m_socket, SIGNAL(readyRead()), this, SLOT(_q_socketReadyRead()));
 	d->m_socket->connectToHost(hostname, port);
 }
 
