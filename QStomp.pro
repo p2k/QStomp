@@ -28,11 +28,11 @@ INCLUDEPATH += src
 SOURCES += src/qstomp.cpp
 HEADERS += src/qstomp.h \
     src/qstomp_global.h \
-    src/qstomp_p.h
+	src/qstomp_p.h
 
 target.path = $$DESTDIR/lib
 dist_headers.path = $$DESTDIR/include/qstomp
 dist_headers.files = src/qstomp.h src/qstomp_global.h
 
-VERSION = 0.2.1
+VERSION = 0.3.0
 INSTALLS += target dist_headers

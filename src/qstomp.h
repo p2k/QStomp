@@ -41,10 +41,8 @@ typedef QList< QPair<QByteArray, QByteArray> > QStompHeaderList;
 
 class QSTOMPSHARED_EXPORT QStompFrame
 {
+	P_DECLARE_PRIVATE(QStompFrame)
 public:
-	QStompFrame();
-	QStompFrame(const QStompFrame &other);
-	QStompFrame(const QByteArray &frame);
 	virtual ~QStompFrame();
 
 	QStompFrame &operator=(const QStompFrame &other);
@@ -85,12 +83,16 @@ protected:
 	bool parse(const QByteArray &str);
 	void setValid(bool);
 
-private:
-	QStompFramePrivate * const d;
+protected:
+	QStompFrame(QStompFramePrivate * d);
+	QStompFrame(const QStompFrame &other, QStompFramePrivate * d);
+
+	QStompFramePrivate * const pd_ptr;
 };
 
 class QSTOMPSHARED_EXPORT QStompResponseFrame : public QStompFrame
 {
+	P_DECLARE_PRIVATE(QStompResponseFrame)
 public:
 	enum ResponseType {
 		ResponseInvalid = 0,
@@ -105,10 +107,9 @@ public:
 	QStompResponseFrame(const QByteArray &frame);
 	QStompResponseFrame(ResponseType type);
 	QStompResponseFrame &operator=(const QStompResponseFrame &other);
-	~QStompResponseFrame();
 
 	void setType(ResponseType type);
-	ResponseType type();
+	ResponseType type() const;
 
 	bool hasDestination() const;
 	QByteArray destination() const;
@@ -134,13 +135,11 @@ public:
 
 protected:
 	bool parseHeaderLine(const QByteArray &line, int number);
-
-private:
-	QStompResponseFramePrivate * const dd;
 };
 
 class QSTOMPSHARED_EXPORT QStompRequestFrame : public QStompFrame
 {
+	P_DECLARE_PRIVATE(QStompRequestFrame)
 public:
 	enum RequestType {
 		RequestInvalid = 0,
@@ -164,10 +163,9 @@ public:
 	QStompRequestFrame(const QByteArray &frame);
 	QStompRequestFrame(RequestType type);
 	QStompRequestFrame &operator=(const QStompRequestFrame &other);
-	~QStompRequestFrame();
 
 	void setType(RequestType type);
-	RequestType type();
+	RequestType type() const;
 
 	bool hasDestination() const;
 	QByteArray destination() const;
@@ -197,14 +195,12 @@ public:
 
 protected:
 	bool parseHeaderLine(const QByteArray &line, int number);
-
-private:
-	QStompRequestFramePrivate * const dd;
 };
 
 class QSTOMPSHARED_EXPORT QStompClient : public QObject
 {
 	Q_OBJECT
+	P_DECLARE_PRIVATE(QStompClient)
 public:
 
 	explicit QStompClient(QObject *parent = 0);
@@ -220,7 +216,7 @@ public:
 
 	void connectToHost(const QString &hostname, quint16 port = 61613);
 	void setSocket(QTcpSocket *socket);
-	QTcpSocket * socket();
+	QTcpSocket * socket() const;
 
 	void sendFrame(const QStompRequestFrame &frame);
 
@@ -258,11 +254,14 @@ Q_SIGNALS:
 
 	void frameReceived();
 
-private Q_SLOTS:
-	void socketReadyRead();
-
 private:
-	QStompClientPrivate * const d;
+	QStompClientPrivate * const pd_ptr;
+	Q_PRIVATE_SLOT(pd_func(), void _q_socketReadyRead());
 };
+
+// Include private header so MOC won't complain
+#ifdef P_INCLUDE
+#  include "qstomp_p.h"
+#endif
 
 #endif // QSTOMP_H
