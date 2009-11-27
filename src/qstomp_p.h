@@ -23,6 +23,8 @@
 
 #include <QtCore/QObject>
 
+#include "pimpl.h"
+
 class QStompFramePrivate
 {
 public:
@@ -46,7 +48,10 @@ public:
 
 class QStompClientPrivate
 {
+	P_DECLARE_PUBLIC(QStompClient)
 public:
+	QStompClientPrivate(QStompClient * q) : pq_ptr(q) {}
+
 	QTcpSocket * m_socket;
 	const QTextCodec * m_textCodec;
 
@@ -54,6 +59,10 @@ public:
 	QList<QStompResponseFrame> m_framebuffer;
 
 	quint32 findMessageBytes();
+
+	void _q_socketReadyRead();
+private:
+	QStompClient * const pq_ptr;
 };
 
 #endif // QSTOMP_P_H
