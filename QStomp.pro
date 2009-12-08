@@ -31,9 +31,17 @@ HEADERS += src/qstomp.h \
 	src/qstomp_p.h
 
 target.path = $$[QT_INSTALL_LIBS]
-dist_headers.path = $$[QT_INSTALL_HEADERS]/qstomp
+dist_headers.path = $$[QT_INSTALL_HEADERS]/QStomp
 dist_headers.files = src/qstomp.h src/qstomp_global.h
 
-VERSION = 0.3.1
+VERSION = 0.3.2
 INSTALLS += target dist_headers
+macx {
+	CONFIG += lib_bundle
+	FRAMEWORK_HEADERS.version = Versions
+	FRAMEWORK_HEADERS.files = src/qstomp.h src/qstomp_global.h
+	FRAMEWORK_HEADERS.path = Headers
+	QMAKE_BUNDLE_DATA += FRAMEWORK_HEADERS
+	QMAKE_FRAMEWORK_BUNDLE_NAME = QStomp
+}
 

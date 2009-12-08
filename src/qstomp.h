@@ -39,7 +39,7 @@ class QStompClientPrivate;
 
 typedef QList< QPair<QByteArray, QByteArray> > QStompHeaderList;
 
-class QSTOMPSHARED_EXPORT QStompFrame
+class QSTOMP_SHARED_EXPORT QStompFrame
 {
 	P_DECLARE_PRIVATE(QStompFrame)
 public:
@@ -90,7 +90,7 @@ protected:
 	QStompFramePrivate * const pd_ptr;
 };
 
-class QSTOMPSHARED_EXPORT QStompResponseFrame : public QStompFrame
+class QSTOMP_SHARED_EXPORT QStompResponseFrame : public QStompFrame
 {
 	P_DECLARE_PRIVATE(QStompResponseFrame)
 public:
@@ -137,7 +137,7 @@ protected:
 	bool parseHeaderLine(const QByteArray &line, int number);
 };
 
-class QSTOMPSHARED_EXPORT QStompRequestFrame : public QStompFrame
+class QSTOMP_SHARED_EXPORT QStompRequestFrame : public QStompFrame
 {
 	P_DECLARE_PRIVATE(QStompRequestFrame)
 public:
@@ -197,7 +197,7 @@ protected:
 	bool parseHeaderLine(const QByteArray &line, int number);
 };
 
-class QSTOMPSHARED_EXPORT QStompClient : public QObject
+class QSTOMP_SHARED_EXPORT QStompClient : public QObject
 {
 	Q_OBJECT
 	P_DECLARE_PRIVATE(QStompClient)
@@ -260,7 +260,7 @@ private:
 };
 
 // Include private header so MOC won't complain
-#ifdef P_INCLUDE
+#ifdef QSTOMP_P_INCLUDE
 #  include "qstomp_p.h"
 #endif
 

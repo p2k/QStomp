@@ -37,10 +37,10 @@
 #define P_Q(Class) Class * const q = this->pq_func()
 
 #if defined(QSTOMP_LIBRARY)
-#  define QSTOMPSHARED_EXPORT Q_DECL_EXPORT
-#  define P_INCLUDE
+#  define QSTOMP_SHARED_EXPORT Q_DECL_EXPORT
+#  define QSTOMP_P_INCLUDE
 #else
-#  define QSTOMPSHARED_EXPORT Q_DECL_IMPORT
+#  define QSTOMP_SHARED_EXPORT Q_DECL_IMPORT
 #endif
 
 #endif // QSTOMP_GLOBAL_H
